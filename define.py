@@ -1,66 +1,13 @@
-<<<<<<< HEAD
-#! /usr/bin/env python
-from wordnik import swagger,WordApi
-=======
 #!/usr/bin/python
 import sys
->>>>>>> 8674003999b632dc97f01d060a78fcad7813249f
 from sys import argv
 import optparse
 from os import system
 import requests
-<<<<<<< HEAD
-arg = optparse.OptionParser()
-arg.add_option("-a","--audio",action="store_true",default=False)
-arg.add_option("-t","--thesaurus",action="store_true",default=False)
-arg.add_option("-u","--urban",action="store_true",default=False)
-opts,rem = arg.parse_args(argv)
-audio = opts.audio
-thesaurus = opts.thesaurus
-urban = opts.urban
-=======
 
->>>>>>> 8674003999b632dc97f01d060a78fcad7813249f
 key = "1e940957819058fe3ec7c59d43c09504b400110db7faa0509"
 tkey = "e415520c671c26518df498d8f4736cac"
 urbankey = "ub2JDDg9Iumsh1HfdO3a3HQbZi0up1qe8LkjsnWQvyVvQLFn1q"
-<<<<<<< HEAD
-client = swagger.ApiClient(key,"http://api.wordnik.com/v4")
-client = WordApi.WordApi(client)
-for i in range(1,len(rem)):
-    if urban==False:
-        try:  
-            print(rem[i].upper() + ": \n" + client.getDefinitions(rem[i])[0].text)
-        except TypeError:
-            print("Not Found")
-            pass
-    elif urban:
-        urb = requests.get("https://mashape-community-urban-dictionary.p.mashape.com/define?term=%s" % rem[i] ,headers={"X-Mashape-Key":urbankey}).json()
-        if len(urb["list"])>0:
-            print(rem[i].upper() + ": \n" + urb["list"][0]["definition"])
-        else:
-            print("Not Found")
-    if thesaurus:
-        thes = requests.get("http://words.bighugelabs.com/api/2/%s/%s/json" % (tkey,rem[i])).json()
-        print("SYNONYMS: ")
-        if "noun" in thes:
-            print("\nNouns: %s" % " ".join(thes["noun"]["syn"]))
-        if "verb" in thes:
-            print("Verbs: %s" % " ".join(thes["verb"]["syn"]))
-    if audio:
-        ask = raw_input("Would you like to hear audio pronounciation? [Y/N] ")
-        if ask.lower().startswith("y"):
-            url = client.getAudio(rem[i])[0].fileUrl
-            filen = wget.download(url,"/tmp")
-            print(url)
-            system("play -t mp3 -q %s" % filen)
-            while True:
-                ask = raw_input("\nWould you like to hear it again? [Y/N] ")
-                if ask.lower().startswith("y"):
-                    system("play -t mp3 -q %s" % filen)
-                else:
-                    break
-=======
 class dict:
     def __init__(self,key,urbankey,tkey):
         self.key = key
@@ -186,14 +133,13 @@ def print_each_definition(words, client, optional_args):
     for word in words[1:]:
         if urban:
             print_urban_dictionary_definition(word,client)
->>>>>>> 8674003999b632dc97f01d060a78fcad7813249f
         else:
             print_wordnik_definition(word, client)
         if thesaurus:
             print_thesaurus_response(word,client)
         if audio:
             play_definition(word, client)
-
+__all__=["dict","print_each_definition"]
 if __name__ == "__main__":
     (optional_args, required_args) = get_args()
     check_args_valid(required_args)

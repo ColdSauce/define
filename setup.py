@@ -1,9 +1,12 @@
-from distutils.core import setup
+try:
+            from setuptools import setup
+except ImportError:
+            from distutils.core import setup
 
 setup(name='define',
       description='Terminal Dictionary',
       long_description=open('README.rst').read(),
-      version='0.1',
+      version='1.54',
       author='SethDusek',
       author_email='shibe@openmailbox.org',
       url='https://github.com/SethDusek/define',
@@ -12,7 +15,7 @@ setup(name='define',
       ("share/doc/define", ["LICENSE"])
       ],
       scripts=['define'],
-      install_requires=['wordnik', 'requests', 'wget'],
+      install_requires=['requests'],
       classifiers=['Intended Audience :: End Users/Desktop',
                    'Programming Language :: Python :: 2',
                    'Programming Language :: Python :: 3'],
